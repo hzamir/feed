@@ -1,0 +1,40 @@
+# the prefixes app, server, infoutil, endpoints and spring all belong to spring boot
+app:
+  name:         feed
+  description:  a microservice that serves up data
+
+server:
+  port: 80 # should be overridden by heroku .env on local file
+
+endpoints:
+  shutdown:
+    enabled: true #this allows the /shutdown url to operate, for test purposes only
+
+spring:
+  jackson:
+    serialization:
+      indent_output: true
+
+
+# do not modify these cron "constants if you want to change cleanup behavior define a new constant and use it
+cronExpressionConstants:
+  every10Seconds:       '0/10 * *   1/1 * ?      '
+  every20Seconds:       '0/20 * *   1/1 * ?      '
+  everyMinute:          '0 0/1  *   1/1 * ?      '
+  everyFiveMinutes:     '0 0/5  *   1/1 * ?      '
+  everyTenMinutes:      '0 0/10 *   1/1 * ?      '
+  onTheQuarterHour:     '0 0/15 *   1/1 * ?      '
+  onTheHalfHour:        '0 0/30 *   1/1 * ?      '
+  onTheHour:            '0 0    0/1 1/1 * ?      '
+  weeknightsAtMidnight: '0 0    0   ?   * TUE-SAT'
+  dailyAtMidnight:      '0 0    0   1/1 * ?      '
+
+
+# -------------------------------------------------------------------------
+feed:
+  unitSeconds: 60        # seconds per frequency / unitSeconds is the period
+  frequency: 6           #      how long before sessions are terminated for inactivity
+  itemsPerUpdate: 10     # how many updates to perform durings scheduled update
+  cron: ${cronExpressionConstants.everyMinute}    #oh, never mind above, for now use a cron
+
+

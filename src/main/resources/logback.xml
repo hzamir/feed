@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <property name="LOGDIR" value="./logs"/>
+  <property name="LOGFILENAME" value="feed"/>
+
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <withJansi>true</withJansi>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <Pattern>
+        %highlight(%.-1level) %d{HH:mm:ss.SSS} %cyan(%36.36logger) - %highlight(%msg%n)
+      </Pattern>
+    </encoder>
+  </appender>
+
+  <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOGDIR}/${LOGFILENAME}.log</file>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <Pattern>
+        %.-1level %d{HH:mm:ss.SSS} %36.36logger - %msg%n
+      </Pattern>
+    </encoder>
+
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- rollover daily -->
+      <fileNamePattern>${LOGDIR}/${LOGFILENAME}.%d.log</fileNamePattern>
+      <maxHistory>30</maxHistory>
+    </rollingPolicy>
+
+  </appender>
+  <logger name="com.baliset.feed" level="debug" />
+  <logger name="org.springframework.web.servlet.handler.*" level="warn" />
+  <logger name="org.springframework.web.servlet.mvc.method.annotation.*" level="warn" />
+
+  <root level="info">
+    <appender-ref ref="CONSOLE"/>
+    <appender-ref ref="ROLLING"/>
+  </root>
+
+</configuration>
