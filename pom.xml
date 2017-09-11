@@ -3,19 +3,21 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.example</groupId>
-  <artifactId>java-getting-started</artifactId>
+  <groupId>com.baliset</groupId>
+  <artifactId>feed</artifactId>
   <version>1.0</version>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.5.2.RELEASE</version>
+    <version>1.5.6.RELEASE</version>
   </parent>
-  <name>java-getting-started</name>
+  <name>feed</name>
 
   <properties>
     <java.version>1.8</java.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <webjars-bootstrap.version>3.3.6</webjars-bootstrap.version>
@@ -90,6 +92,10 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${project.parent.version}</version>
+        <configuration>
+          <executable>true</executable>
+        </configuration>
         <executions>
           <execution>
             <goals>
