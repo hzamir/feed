@@ -42,6 +42,11 @@
       <version>${project.parent.version}</version>  <!-- since parent determines the springboot version -->
       <!--<optional>true</optional>-->
     </dependency>
+    <dependency>
+      <groupId>com.baliset</groupId>
+      <artifactId>springboot-web-utility</artifactId>
+      <version>0.1.2</version>
+    </dependency>
     
     <dependency>
       <!-- support returning objects that are auto serialized to json (default) xml, yaml (addons below) -->

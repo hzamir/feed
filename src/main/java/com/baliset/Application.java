@@ -1,4 +1,4 @@
-package com.baliset.feed;
+package com.baliset;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

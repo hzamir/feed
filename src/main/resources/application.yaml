@@ -18,6 +18,8 @@ spring:
 
 # do not modify these cron "constants if you want to change cleanup behavior define a new constant and use it
 cronExpressionConstants:
+  everySecond:          '0/1  * *   1/1 * ?      '
+  every5Seconds:        '0/5  * *   1/1 * ?      '
   every10Seconds:       '0/10 * *   1/1 * ?      '
   every20Seconds:       '0/20 * *   1/1 * ?      '
   everyMinute:          '0 0/1  *   1/1 * ?      '
@@ -35,6 +37,14 @@ feed:
   unitSeconds: 60        # seconds per frequency / unitSeconds is the period
   frequency: 6           #      how long before sessions are terminated for inactivity
   itemsPerUpdate: 10     # how many updates to perform durings scheduled update
-  cron: ${cronExpressionConstants.everyMinute}    #oh, never mind above, for now use a cron
+  cron: ${cronExpressionConstants.everySecond}    #oh, never mind above, for now use a cron
+
+ghost:
+  unitSeconds: 60        # seconds per frequency / unitSeconds is the period
+  frequency: 6           #      how long before sessions are terminated for inactivity
+  itemsPerUpdate: 10     # how many updates to perform durings scheduled update
+  cron: ${cronExpressionConstants.everySecond}    #oh, never mind above, for now use a cron
+  symbols: ['FOOX', 'BOOX', 'DOOX']
+
 
 
