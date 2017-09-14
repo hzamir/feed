@@ -42,10 +42,7 @@ public class OrderService
   {
     book(symbol).ask(price, quantity);
   }
-
-
-
-
+  
 
   //---- private methods ----
   private OrderBook book(String symbol)
