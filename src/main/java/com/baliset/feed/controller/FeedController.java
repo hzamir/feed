@@ -49,4 +49,27 @@ public class FeedController
   }
 
 
+  @RequestMapping(value="/order/bid", method = RequestMethod.POST, produces={"application/json"})
+  public ResponseEntity<Instrument>
+  bid(@RequestBody OrderRequest req) throws Exception
+  {
+    orderService.bid(req.symbol, req.party, req.quantity, req.price);
+
+    HttpStatus httpStatus =  HttpStatus.OK;
+    return new ResponseEntity<>(orderService.top(req.symbol),httpStatus);
+  }
+
+  @RequestMapping(value="/order/ask", method = RequestMethod.POST, produces={"application/json"})
+  public ResponseEntity<Instrument>
+  ask(@RequestBody OrderRequest req) throws Exception
+  {
+    orderService.ask(req.symbol, req.party, req.quantity, req.price);
+
+    HttpStatus httpStatus =  HttpStatus.OK;
+    return new ResponseEntity<>(orderService.top(req.symbol),httpStatus);
+  }
+
+
+
+
 }
