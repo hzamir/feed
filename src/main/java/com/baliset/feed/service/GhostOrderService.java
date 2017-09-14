@@ -54,10 +54,10 @@ public class GhostOrderService
 
   private void arbitraryOrder(String symbol)
   {
-    Instrument instrument = orderService.top(symbol);
+    Quote quote = orderService.top(symbol);
 
-    double bid = instrument.getBid();
-    double ask = instrument.getAsk();
+    double bid = quote.getBid();
+    double ask = quote.getAsk();
 
     double nbid = fluctuator.fluctuate(bid);
 

@@ -13,15 +13,15 @@ import java.util.*;
 public class InstrumentService
 {
   private static Logger logger = LoggerFactory.getLogger(InstrumentService.class);
-  private FeedConfig       config;
-  private PriceGenerator   generator;
-  private Fluctuator       fluctuator;
-  private List<Instrument> instruments;
+  private FeedConfig     config;
+  private PriceGenerator generator;
+  private Fluctuator     fluctuator;
+  private List<Quote>    quotes;
 
   public InstrumentService(@Autowired FeedConfig config)
   {
     this.config = config;
-    this.instruments = new ArrayList<>();
+    this.quotes = new ArrayList<>();
 
     this.generator = new PriceGenerator(1, 500);
     this.fluctuator = new Fluctuator(0.01, 0.15);
@@ -30,17 +30,17 @@ public class InstrumentService
     createInstruments();
   }
 
-  private void alterPrices(Instrument instrument)
+  private void alterPrices(Quote quote)
   {
-    double bid = instrument.getBid();
-    double ask = instrument.getAsk();
+    double bid = quote.getBid();
+    double ask = quote.getAsk();
 
     double nbid = fluctuator.fluctuate(bid);
 
     double delta = nbid - bid;
     double nask = (delta > 0)? ask + delta: ask - delta;
 
-    instrument.setBidAsk(nbid,nask);
+    quote.setBidAsk(nbid,nask);
   }
 
   private void createInstruments()
@@ -52,22 +52,22 @@ public class InstrumentService
        double price = generator.generate();
        double price2 = fluctuator.fluctuate(price);
 
-       Instrument instrument = price < price2? new Instrument(s, price, price2): new Instrument(s, price2, price);
-       instruments.add(instrument);
+       Quote quote = price < price2? new Quote(s, price, price2): new Quote(s, price2, price);
+       quotes.add(quote);
      }
 
   }
 
-  public List<Instrument> list()
+  public List<Quote> list()
   {
-    List<Instrument> list = new ArrayList<>(instruments.size());
-    list.addAll(instruments);
+    List<Quote> list = new ArrayList<>(quotes.size());
+    list.addAll(quotes);
     return list;
   }
 
   @Scheduled(cron = "${feed.cron}")
   private void udpater()
   {
-    instruments.forEach(this::alterPrices);
+    quotes.forEach(this::alterPrices);
   }
 }

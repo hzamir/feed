@@ -16,11 +16,11 @@ public class OrderService
 
 
   // idempotent methods
-  public Instrument top(String symbol) {return book(symbol).topOfBook(); }
-  public List<Instrument> top()
+  public Quote top(String symbol) {return book(symbol).topOfBook(); }
+  public List<Quote> top()
   {
       return books.values().stream()
-                  .map(orderBook -> orderBook.topOfBook())
+                  .map(OrderBook::topOfBook)
                   .collect(Collectors.toList());
   }
 

@@ -31,26 +31,26 @@ public class FeedController
 
 
   @RequestMapping(value="/instrument/list", method = RequestMethod.GET, produces={"application/json"})
-  public ResponseEntity<List<Instrument>>
+  public ResponseEntity<List<Quote>>
   instrumentList(HttpServletRequest req) throws Exception
   {
-    List<Instrument> list = updateService.list();
-    HttpStatus httpStatus =  HttpStatus.OK;
+    List<Quote> list       = updateService.list();
+    HttpStatus  httpStatus =  HttpStatus.OK;
     return new ResponseEntity<>(list,httpStatus);
   }
 
   @RequestMapping(value="/order/list", method = RequestMethod.GET, produces={"application/json"})
-  public ResponseEntity<List<Instrument>>
+  public ResponseEntity<List<Quote>>
   orderList(HttpServletRequest req) throws Exception
   {
-    List<Instrument> list = orderService.top();
-    HttpStatus httpStatus =  HttpStatus.OK;
+    List<Quote> list       = orderService.top();
+    HttpStatus  httpStatus =  HttpStatus.OK;
     return new ResponseEntity<>(list,httpStatus);
   }
 
 
   @RequestMapping(value="/order/bid", method = RequestMethod.POST, produces={"application/json"})
-  public ResponseEntity<Instrument>
+  public ResponseEntity<Quote>
   bid(@RequestBody OrderRequest req) throws Exception
   {
     orderService.bid(req.symbol, req.party, req.quantity, req.price);
@@ -60,7 +60,7 @@ public class FeedController
   }
 
   @RequestMapping(value="/order/ask", method = RequestMethod.POST, produces={"application/json"})
-  public ResponseEntity<Instrument>
+  public ResponseEntity<Quote>
   ask(@RequestBody OrderRequest req) throws Exception
   {
     orderService.ask(req.symbol, req.party, req.quantity, req.price);

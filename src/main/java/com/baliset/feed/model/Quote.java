@@ -1,6 +1,6 @@
 package com.baliset.feed.model;
 
-public class Instrument
+public class Quote
 {
   private String name;
   private double bid;
@@ -23,7 +23,7 @@ public class Instrument
     this.bid = round(bid); this.ask = round(ask);
   }
 
-  public Instrument(String name, double bid, double ask)
+  public Quote(String name, double bid, double ask)
   {
     this.name = name;
     this.bid = round(bid);
